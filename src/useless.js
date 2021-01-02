@@ -23,7 +23,7 @@ export default App;
 class UselessButton extends React.Component{
     constructor(props){
         super(props);
-        this.state = {class: "blank"};
+        this.state = {class: "default"};
         this.showMessage = this.showMessage.bind(this);
         this.changeColor = this.changeColor.bind(this);
     }

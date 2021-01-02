@@ -12,7 +12,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <UselessButton type="color"/>
         
-        <UselessButton text="I do!"/>
+        <UselessButton text="I do nothing useful!"/>
       </header>
     </div>
   );
@@ -20,19 +20,17 @@ function App() {
 
 export default App;
 
-const green = '#39D1B4';
-const yellow = '#FFD712';
-
 class UselessButton extends React.Component{
     constructor(props){
         super(props);
-        this.state = {color: "not green yet!"};
+        this.state = {class: "blank"};
         this.showMessage = this.showMessage.bind(this);
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor(){
-        const color = this.state.color === green ? yellow : green;
-        this.setState({color: color});
+        const color = this.state.class === "green" ? "yellow" : "green";
+        this.setState({class: color});
+        
     }
     showMessage(){
         alert('Told ya!');
@@ -45,13 +43,10 @@ class UselessButton extends React.Component{
         else
         {
             return (
-                <div style={{color: this.state.color}}>
-                    <button class="colorButton" onClick={this.changeColor}>{this.props.text}</button>
-                </div>
-            
+                    <button class={this.state.class} onClick={this.changeColor}>The color is: {this.state.class}</button>
             );
         }
     }
 }
 
-UselessButton.defaultProps = {text: 'I do not work yet!', type: 'message'};
+UselessButton.defaultProps = {text: 'Look what I can do!!', type: 'message'};

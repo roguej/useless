@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Clock/>
          <p>
           Welcome to my useless React app!
         </p>
@@ -23,13 +24,15 @@ export default App;
 class UselessButton extends React.Component{
     constructor(props){
         super(props);
-        this.state = {class: "default"};
+        this.state = {class: "default", index: 0};
         this.showMessage = this.showMessage.bind(this);
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor(){
-        const color = this.state.class === "green" ? "yellow" : "green";
-        this.setState({class: color});
+        const colors = ["green", "yellow", "red", "blue", "orange", "brown"];
+        var i = Math.round(Math.random() * 10) % colors.length;
+        const color = colors[i];
+        this.setState({class: color, index: i});
         
     }
     showMessage(){
@@ -43,10 +46,30 @@ class UselessButton extends React.Component{
         else
         {
             return (
-                    <button class={this.state.class} onClick={this.changeColor}>The color is: {this.state.class}</button>
+                    <button class={this.state.class} onClick={this.changeColor}>The color is: {this.state.class} ({this.state.index})</button>
             );
         }
     }
 }
 
 UselessButton.defaultProps = {text: 'Look what I can do!!', type: 'message'};
+
+class Clock extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {time: new Date()};
+    }
+
+    render(){
+        return (
+            <h1>Current Time: {this.state.time.toLocaleTimeString()}</h1>
+        );
+    }
+
+    componentDidMount(){
+        const oneSec = 1000;
+        setInterval(() => {
+        this.setState({time: new Date()});
+        }, oneSec);
+    }
+}

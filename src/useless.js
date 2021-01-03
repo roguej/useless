@@ -24,15 +24,15 @@ export default App;
 class UselessButton extends React.Component{
     constructor(props){
         super(props);
-        this.state = {class: "default", index: 0};
+        this.state = {class: "default"};
         this.showMessage = this.showMessage.bind(this);
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor(){
         const colors = ["green", "yellow", "red", "blue", "orange", "brown"];
         var i = Math.round(Math.random() * 10) % colors.length;
-        const color = colors[i];
-        this.setState({class: color, index: i});
+        var color = colors[i];
+        this.setState({class: color});
         
     }
     showMessage(){
@@ -46,7 +46,7 @@ class UselessButton extends React.Component{
         else
         {
             return (
-                    <button class={this.state.class} onClick={this.changeColor}>The color is: {this.state.class} ({this.state.index})</button>
+                    <button class={this.state.class} onClick={this.changeColor}>The color is: {this.state.class}</button>
             );
         }
     }

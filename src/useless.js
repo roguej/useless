@@ -43,9 +43,9 @@ class UselessButton extends React.Component{
     constructor(props){
         super(props);
         this.showMessage = this.showMessage.bind(this);
-		this.handleColorChange = this.handleColorChange.bind(this);
+		this.handleClick = this.handleClick.bind(this);
     }
-    handleColorChange(){
+    handleClick(){
         const colors = ["green", "yellow", "red", "blue", "orange", "brown"];
         var i = Math.round(Math.random() * 10) % colors.length;
         var color = colors[i];
@@ -63,7 +63,7 @@ class UselessButton extends React.Component{
         else
         {
             return (
-                    <button class={this.props.className} onClick={this.handleColorChange}>The color is: {this.props.className}</button>
+                    <button class={this.props.className} onClick={this.handleClick}>The color is: {this.props.className}</button>
             );
         }
     }

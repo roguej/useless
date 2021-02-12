@@ -2,21 +2,34 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Clock/>
-         <p>
-          Welcome to my useless React app!
-        </p>
-        <img src={logo} className="App-logo" alt="logo" />
-        <UselessButton type="color"/>
-        
-        <UselessButton text="I do nothing useful!"/>
-      </header>
-    </div>
-  );
+//TODO: demonstrate React app pattern of stateful parent component with stateless children. 
+export class App extends React.Component {
+	
+	constructor(props){
+		super(props);
+		this.state = {color: "blue"};
+		this.changeColor = this.changeColor.bind(this);
+	}
+	
+  changeColor(newColor){
+	  this.setState({color: newColor});
+  }
+  render(){
+    return (
+        <div className="App">
+        <header className="App-header">
+            <Clock/>
+            <p>
+            Welcome to my useless React app!
+            </p>
+            <img src={logo} className="App-logo" alt="logo" />
+            <UselessButton onColorChange={this.changeColor} className={this.state.color} type="color"/>
+            
+            <UselessButton text="I do nothing useful!"/>
+        </header>
+        </div>
+    )
+  }
 }
 
 export default App;
@@ -24,15 +37,14 @@ export default App;
 class UselessButton extends React.Component{
     constructor(props){
         super(props);
-        this.state = {class: "default"};
         this.showMessage = this.showMessage.bind(this);
-        this.changeColor = this.changeColor.bind(this);
+		this.handleColorChange = this.handleColorChange.bind(this);
     }
-    changeColor(){
+    handleColorChange(event){
         const colors = ["green", "yellow", "red", "blue", "orange", "brown"];
         var i = Math.round(Math.random() * 10) % colors.length;
         var color = colors[i];
-        this.setState({class: color});
+        this.props.onColorChange(color);
         
     }
     showMessage(){
@@ -46,7 +58,7 @@ class UselessButton extends React.Component{
         else
         {
             return (
-                    <button class={this.state.class} onClick={this.changeColor}>The color is: {this.state.class}</button>
+                    <button class={this.props.className} onClick={this.handleColorChange}>The color is: {this.props.className}</button>
             );
         }
     }

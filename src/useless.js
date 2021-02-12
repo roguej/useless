@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-//TODO: demonstrate React app pattern of stateful parent component with stateless children. 
+
 export class App extends React.Component {
 	
 	constructor(props){

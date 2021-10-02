@@ -5,4 +5,6 @@ COPY src/ /usr/app/src/
 COPY public/ /usr/app/public/
 WORKDIR /usr/app/
 RUN npm install
-CMD npm start
+RUN npm install -g serve
+RUN npm run build
+CMD serve -s build
